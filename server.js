@@ -13,15 +13,15 @@ app.post('/api/reflection', async (req, res) => {
     const { responses } = req.body;
 
     const prompt = `
-      Imagine yourself walking through a house that reflects the owner's mind and spirit. 
-      Your task is to describe this house in exactly four poetic sentences. Use sensory and metaphorical language to make it immersive.
-      Ensure each sentence flows smoothly into the next, and the reflection ends naturally.
+  Imagine yourself walking through a house that reflects the owner's mind and spirit. 
+  Your task is to describe this house in exactly four poetic, complete sentences. 
+  Use sensory and metaphorical language to make it immersive, with each sentence flowing naturally into the next.
 
-      Here are the user's responses:
-      ${responses.map((response) => `• "${response.answer}"`).join('\n')}
+  Here are the user's responses:
+  ${responses.map((response) => `• "${response.answer}"`).join('\n')}
 
-      Please respond in exactly four sentences, with no trailing or incomplete thoughts.
-    `;
+  Please respond in exactly four sentences. Make sure there are no incomplete thoughts, and end naturally.
+`;
 
     try {
         const response = await axios.post(
@@ -33,7 +33,6 @@ app.post('/api/reflection', async (req, res) => {
                 temperature: 0.8,  // Keep it creative but coherent
                 presence_penalty: 0.5,
                 frequency_penalty: 0.3,
-                stop: ["\n"],  // Ensures the response stops naturally after four sentences
             },
             {
                 headers: {
